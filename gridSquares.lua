@@ -5,7 +5,7 @@ function spawnBlockAt(x,y,z, color)
         hb.enableDraw()
         hb.overlay()
         hb.setColor(color)
-        hb.xray(true)
+        -- hb.xray(true)
         hb.setWidth( 1 )
 end
 
@@ -62,11 +62,11 @@ end
 -- USER VARIABLES -------------------------------------------
 
 interval = 23
-color = colors.blue
+
 
 -- INITIALIZATION -------------------------------------------
 
-    
+    color = colors.blue
     xPreGrid = math.floor((getPlayer().pos[1])/interval)*interval
     yPreGrid = math.floor((getPlayer().pos[2])/interval)*interval
     zPreGrid = math.floor((getPlayer().pos[3])/interval)*interval  -- find grid position if grid centers at 0,0
