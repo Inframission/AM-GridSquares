@@ -51,7 +51,7 @@
         hb.setWidth( 1 )
     end
 
-    function renderNewGrid(x,z)
+    function renderNewGrid()
     -- Calc current grid position from coordinates
         xGrid = ( math.floor((getPlayer().pos[1])/xinterval)*xinterval ) - xoffset -- find x-coord of which grid player is currently in
         yGrid = ( math.floor((getPlayer().pos[2])/yinterval)*yinterval ) - yoffset -- find y-coord of which grid player is currently in
@@ -91,12 +91,11 @@ if gridSquares == true then
     log("&7[&6Bots&7] &6* &aRENDERING...")
 
     while gridSquares do
-        renderNewGrid(xGrid,zGrid)
+        renderNewGrid()
         sleep(100)
     end
 
 else
     log("&7[&6Bots&7] &6* &cRENDERING...")
-    -- clear all rendered
-    hud3D.clearAll()
+    hud3D.clearAll() -- clear all rendered
 end
