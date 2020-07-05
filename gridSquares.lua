@@ -88,15 +88,15 @@
 
 gridSquares = not gridSquares
 if gridSquares == true then
-log("&7[&6Bots&7] &6* &aRENDERING...")
+    log("&7[&6Bots&7] &6* &aRENDERING...")
 
-while gridSquares do
-    renderNewGrid(xGrid,zGrid)
-    sleep(100)
-end
+    while gridSquares do
+        renderNewGrid(xGrid,zGrid)
+        sleep(100)
+    end
 
 else
-log("&7[&6Bots&7] &6* &cRENDERING...")
--- clear all rendered
+    log("&7[&6Bots&7] &6* &cRENDERING...")
+    -- clear all rendered
     hud3D.clearAll()
 end
