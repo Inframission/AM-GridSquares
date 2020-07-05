@@ -1,26 +1,29 @@
 -- USER VARIABLES -------------------------------------------
 
-    interval = 23
+    xcount = 7
+    ycount = 3
+    zcount = 7
 
-    xcount = 6
-    ycount = 0
-    zcount = 6
+    xinterval = 10
+    yinterval = 5
+    zinterval = 10
 
-    xinterval = 7
-    yinterval = 1
-    zinterval = 7
+    showGridThroughBlocks = false
 
 -- INITIALIZATION -------------------------------------------
+    -- Preprocessing
+        xcount = xcount-1
+        ycount = ycount-1
+        zcount = zcount-1
 
-    color = colors.blue
-    local y = math.floor(getPlayer().pos[2])
-
-    xPreGrid = math.floor((getPlayer().pos[1])/xinterval)*xinterval
-    yPreGrid = math.floor((getPlayer().pos[2])/yinterval)*yinterval
-    zPreGrid = math.floor((getPlayer().pos[3])/zinterval)*zinterval  -- find grid position if grid centers at 0,0
-    xoffset = xPreGrid - math.floor((getPlayer().pos[1]))
-    yoffset = yPreGrid - math.floor((getPlayer().pos[2]))
-    zoffset = zPreGrid - math.floor((getPlayer().pos[3]))          -- find how offset player is from current grid
+    -- find grid position if grid centers at 0,0
+        xPreGrid = math.floor((getPlayer().pos[1])/xinterval)*xinterval
+        yPreGrid = math.floor((getPlayer().pos[2])/yinterval)*yinterval
+        zPreGrid = math.floor((getPlayer().pos[3])/zinterval)*zinterval  
+    -- find how offset player is from current grid
+        xoffset = xPreGrid - math.floor((getPlayer().pos[1]))
+        yoffset = yPreGrid - math.floor((getPlayer().pos[2]))
+        zoffset = zPreGrid - math.floor((getPlayer().pos[3]))          
 
     colors = {
         blue = {
@@ -45,6 +48,8 @@
         }
     }
 
+    color = colors.blue
+
 -- FUNCTION DEFINITIONS -------------------------------------
 
     function spawnBlockAt(x,y,z, color)
@@ -52,7 +57,7 @@
         hb.enableDraw()
         hb.overlay()
         hb.setColor(color)
-        -- hb.xray(true)
+        hb.xray(showGridThroughBlocks)
         hb.setWidth( 1 )
     end
 
@@ -91,11 +96,11 @@
 
 -- MAIN -----------------------------------------------------
 
-rendering = not rendering
-if rendering == true then
+gridSquares = not gridSquares
+if gridSquares == true then
 log("&7[&6Bots&7] &6* &aRENDERING...")
 
-while rendering do
+while gridSquares do
     renderNewGrid(xGrid,zGrid)
     sleep(100)
 end
