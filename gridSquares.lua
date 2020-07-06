@@ -1,12 +1,12 @@
 -- USER VARIABLES -------------------------------------------
 
     xcount = 7
-    ycount = 3
+    ycount = 1
     zcount = 7
 
-    xinterval = 10
-    yinterval = 5
-    zinterval = 10
+    xinterval = 6
+    yinterval = 6
+    zinterval = 6
 
     showGridThroughBlocks = false
 
@@ -64,23 +64,23 @@
         ydiff = math.abs( yGrid - math.floor((getPlayer().pos[2])) )
         zdiff = math.abs( zGrid - math.floor((getPlayer().pos[3])) )
     -- If out of center ... render new grid
-        -- if(xdiff > xinterval or ydiff > yinterval or zdiff > zinterval)then
-            hud3D.clearAll()
-            for i=0,xcount,1 do
-                xtarg = (xGrid + i*xinterval)-0.5*xcount*xinterval
-                for j=0,zcount,1 do  
-                    ztarg = (zGrid+j*zinterval)-0.5*zcount*zinterval
-                    for l=0,ycount,1 do
-                        ytarg = (yGrid+l*yinterval)-0.5*ycount*yinterval
-                        -- log("yGrid:"..yGrid)
-                        -- log("yinterval:"..yinterval)
-                        -- log("ycount:"..ycount)
-                        spawnBlockAt(xtarg,ytarg,ztarg, color)
-                    end
+    -- if(xdiff > xinterval or ydiff > yinterval or zdiff > zinterval)then
+        hud3D.clearAll()
+        for i=0,xcount,1 do
+            xtarg = (xGrid + i*xinterval)-0.5*xcount*xinterval
+            for j=0,zcount,1 do  
+                ztarg = (zGrid+j*zinterval)-0.5*zcount*zinterval
+                for l=0,ycount,1 do
+                    ytarg = (yGrid+l*yinterval)-0.5*ycount*yinterval
+                    -- log("yGrid:"..yGrid)
+                    -- log("yinterval:"..yinterval)
+                    -- log("ycount:"..ycount)
+                    spawnBlockAt(xtarg,ytarg,ztarg, color)
                 end
             end
-
         end
+
+    end
 
 
 
