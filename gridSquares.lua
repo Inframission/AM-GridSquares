@@ -15,18 +15,15 @@
         xcount = xcount-1
         ycount = ycount-1
         zcount = zcount-1
-        -- find smallest interval
 
-        smallestInterval = 
-
-    -- find grid position if grid centers at 0,0
-        local xPreGrid = math.floor((getPlayer().pos[1])/xinterval)*xinterval
-        local yPreGrid = math.floor((getPlayer().pos[2])/yinterval)*yinterval
-        local zPreGrid = math.floor((getPlayer().pos[3])/zinterval)*zinterval  
-    -- find how offset player is from current grid
-        local xoffset = xPreGrid - math.floor((getPlayer().pos[1]))
-        local yoffset = yPreGrid - math.floor((getPlayer().pos[2]))
-        local zoffset = zPreGrid - math.floor((getPlayer().pos[3]))
+    -- -- find grid position if grid centers at 0,0
+    --     local xPreGrid = math.floor((getPlayer().pos[1])/xinterval)*xinterval
+    --     local yPreGrid = math.floor((getPlayer().pos[2])/yinterval)*yinterval
+    --     local zPreGrid = math.floor((getPlayer().pos[3])/zinterval)*zinterval  
+    -- -- find how offset player is from current grid
+    --     local xoffset = xPreGrid - math.floor((getPlayer().pos[1]))
+    --     local yoffset = yPreGrid - math.floor((getPlayer().pos[2]))
+    --     local zoffset = zPreGrid - math.floor((getPlayer().pos[3]))     
 
     local colors = {
         blue = {
@@ -54,27 +51,15 @@
         hb.setWidth( 1 )
     end
 
-    local function distanceTo(x,z)
-        local xpos = getPlayer().pos[1]
-        local ypos = getPlayer().pos[2]
-        local zpos = getPlayer().pos[3]
-        return ( (xpos-x-0.5)^2 + (zpos-z-0.5)^2)^(1/2)
-    end
-
     local function renderNewGrid()
     -- Calc current grid position from coordinates
-        xGrid = ( math.floor((getPlayer().pos[1])/xinterval)*xinterval ) - xoffset -- find x-coord of which grid player is currently in
-        yGrid = ( math.floor((getPlayer().pos[2])/yinterval)*yinterval ) - yoffset -- find y-coord of which grid player is currently in
-        zGrid = ( math.floor((getPlayer().pos[3])/zinterval)*zinterval ) - zoffset -- find z-coord of which grid player is currently in
-    -- Cald distance from center of Grid render
-        xdiff = math.abs( xGrid - math.floor((getPlayer().pos[1])) )
-        ydiff = math.abs( yGrid - math.floor((getPlayer().pos[2])) )
-        zdiff = math.abs( zGrid - math.floor((getPlayer().pos[3])) )
+        xGrid = ( math.floor((getPlayer().pos[1])/xinterval)*xinterval ) - ( (math.floor((getPlayer().pos[1])/xinterval)*xinterval) - math.floor((getPlayer().pos[1])) )        --xGrid-Verbose
+        yGrid = ( math.floor((getPlayer().pos[2])/yinterval)*yinterval ) - ( (math.floor((getPlayer().pos[2])/yinterval)*yinterval) - math.floor((getPlayer().pos[2])) )        --yGrid-Verbose
+        zGrid = ( math.floor((getPlayer().pos[3])/zinterval)*zinterval ) - ( (math.floor((getPlayer().pos[3])/zinterval)*zinterval) - math.floor((getPlayer().pos[3])) )        --zGrid-Verbose
+    -- Calc distance from center of Grid render
+
     -- Render new grid
-        log("xGrid "..xGrid)
-        log("yGrid "..yGrid)
-        log("zGrid "..zGrid)
-        log("Distance to Grid: "distanceTo(xGrid,yGrid,zGrid))
+        -- log(distanceTo(xGrid,yGrid,zGrid))
         hud3D.clearAll()
         for i=0,xcount,1 do
             xtarg = (xGrid + i*xinterval)-0.5*xcount*xinterval
@@ -88,6 +73,7 @@
         end
 
     end
+
 
 
 -- MAIN -----------------------------------------------------
