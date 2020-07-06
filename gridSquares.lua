@@ -1,12 +1,12 @@
 -- USER VARIABLES -------------------------------------------
     --DON'T INPUT COUNT VALUES ABOVE 20
-    local xcount = 7     
-    local ycount = 1     
-    local zcount = 7
+    local xcount = 5     
+    local ycount = 3     
+    local zcount = 5
 
-    local xinterval = 10
-    local yinterval = 1
-    local zinterval = 10
+    local xinterval = 23
+    local yinterval = 23
+    local zinterval = 23
 
     local showGridThroughBlocks = true
     local gridTracksPlayer = true
