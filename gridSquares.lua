@@ -1,14 +1,15 @@
 -- USER VARIABLES -------------------------------------------
-
-    local xcount = 7
-    local ycount = 1
+    --DON'T INPUT COUNT VALUES ABOVE 20
+    local xcount = 7     
+    local ycount = 1     
     local zcount = 7
 
     local xinterval = 10
     local yinterval = 10
     local zinterval = 10
 
-    local showGridThroughBlocks = false
+    local showGridThroughBlocks = true
+    local gridTracksPlayer = true
 
 -- INITIALIZATION -------------------------------------------
     -- Preprocessing
@@ -95,10 +96,12 @@ if gridSquares == true then
     log("&7[&6Bots&7] &6* &aRENDERING...")
     renderNewGrid()
 
-    while gridSquares do
-        if (distanceTo(xGrid, yGrid, zGrid) > smallestInterval) then
+    while gridSquares and gridTracksPlayer do
+        local distance = distanceTo(xGrid, yGrid, zGrid)
+        if (distance > smallestInterval) and (math.floor(distance) ~= previousDistance) then
             renderNewGrid()
         end
+        previousDistance = math.floor(distance)
         sleep(100)
     end
 
