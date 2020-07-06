@@ -4,9 +4,9 @@
     local ycount = 1
     local zcount = 7
 
-    local xinterval = 9
-    local yinterval = 7
-    local zinterval = 8
+    local xinterval = 10
+    local yinterval = 10
+    local zinterval = 10
 
     local showGridThroughBlocks = false
 
@@ -100,7 +100,6 @@ if gridSquares == true then
             renderNewGrid()
         end
         sleep(100)
-        log("Distance to Grid: "..distanceTo(xGrid,yGrid,zGrid) )
     end
 
 else
