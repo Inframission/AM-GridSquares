@@ -1,14 +1,14 @@
 -- USER VARIABLES -------------------------------------------
 
-    xcount = 7
-    ycount = 1
-    zcount = 7
+    local xcount = 7
+    local ycount = 1
+    local zcount = 7
 
-    xinterval = 6
-    yinterval = 6
-    zinterval = 6
+    local xinterval = 10
+    local yinterval = 10
+    local zinterval = 10
 
-    showGridThroughBlocks = false
+    local showGridThroughBlocks = false
 
 -- INITIALIZATION -------------------------------------------
     -- Preprocessing
@@ -17,15 +17,15 @@
         zcount = zcount-1
 
     -- find grid position if grid centers at 0,0
-        xPreGrid = math.floor((getPlayer().pos[1])/xinterval)*xinterval
-        yPreGrid = math.floor((getPlayer().pos[2])/yinterval)*yinterval
-        zPreGrid = math.floor((getPlayer().pos[3])/zinterval)*zinterval  
+        local xPreGrid = math.floor((getPlayer().pos[1])/xinterval)*xinterval
+        local yPreGrid = math.floor((getPlayer().pos[2])/yinterval)*yinterval
+        local zPreGrid = math.floor((getPlayer().pos[3])/zinterval)*zinterval  
     -- find how offset player is from current grid
-        xoffset = xPreGrid - math.floor((getPlayer().pos[1]))
-        yoffset = yPreGrid - math.floor((getPlayer().pos[2]))
-        zoffset = zPreGrid - math.floor((getPlayer().pos[3]))          
+        local xoffset = xPreGrid - math.floor((getPlayer().pos[1]))
+        local yoffset = yPreGrid - math.floor((getPlayer().pos[2]))
+        local zoffset = zPreGrid - math.floor((getPlayer().pos[3]))          
 
-    colors = {
+    local colors = {
         blue = {
             -- red
                 [1] = 0,
@@ -38,11 +38,11 @@
         }
     }
 
-    color = colors.blue
+    local color = colors.blue
 
 -- FUNCTION DEFINITIONS -------------------------------------
 
-    function spawnBlockAt(x,y,z, color)
+    local function spawnBlockAt(x,y,z, color)
         local hb = hud3D.newBlock(x,y,z)
         hb.enableDraw()
         hb.overlay()
@@ -51,20 +51,16 @@
         hb.setWidth( 1 )
     end
 
-    function renderNewGrid()
+    local function renderNewGrid()
     -- Calc current grid position from coordinates
         xGrid = ( math.floor((getPlayer().pos[1])/xinterval)*xinterval ) - xoffset -- find x-coord of which grid player is currently in
         yGrid = ( math.floor((getPlayer().pos[2])/yinterval)*yinterval ) - yoffset -- find y-coord of which grid player is currently in
         zGrid = ( math.floor((getPlayer().pos[3])/zinterval)*zinterval ) - zoffset -- find z-coord of which grid player is currently in
-        -- log("xGrid:"..xGrid)
-        -- log("yGrid:"..yGrid)
-        -- log("zGrid:"..zGrid)
     -- Cald distance from center of Grid render
         xdiff = math.abs( xGrid - math.floor((getPlayer().pos[1])) )
         ydiff = math.abs( yGrid - math.floor((getPlayer().pos[2])) )
         zdiff = math.abs( zGrid - math.floor((getPlayer().pos[3])) )
-    -- If out of center ... render new grid
-    -- if(xdiff > xinterval or ydiff > yinterval or zdiff > zinterval)then
+    -- Render new grid
         hud3D.clearAll()
         for i=0,xcount,1 do
             xtarg = (xGrid + i*xinterval)-0.5*xcount*xinterval
@@ -72,9 +68,6 @@
                 ztarg = (zGrid+j*zinterval)-0.5*zcount*zinterval
                 for l=0,ycount,1 do
                     ytarg = (yGrid+l*yinterval)-0.5*ycount*yinterval
-                    -- log("yGrid:"..yGrid)
-                    -- log("yinterval:"..yinterval)
-                    -- log("ycount:"..ycount)
                     spawnBlockAt(xtarg,ytarg,ztarg, color)
                 end
             end
