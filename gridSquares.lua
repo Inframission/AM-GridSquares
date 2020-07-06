@@ -61,6 +61,7 @@
         ydiff = math.abs( yGrid - math.floor((getPlayer().pos[2])) )
         zdiff = math.abs( zGrid - math.floor((getPlayer().pos[3])) )
     -- Render new grid
+    log(distanceTo(xGrid,yGrid,zGrid))
         hud3D.clearAll()
         for i=0,xcount,1 do
             xtarg = (xGrid + i*xinterval)-0.5*xcount*xinterval
@@ -75,6 +76,12 @@
 
     end
 
+    local function distanceTo(x,y,z)
+        local xpos = getPlayer().pos[1]
+        local ypos = getPlayer().pos[2]
+        local zpos = getPlayer().pos[3]
+        return ( (xpos-x-0.5)^2 + (ypos-z-0.5)^2 + (zpos-z-0.5)^2)^(1/2)
+    end
 
 
 -- MAIN -----------------------------------------------------
@@ -92,3 +99,7 @@ else
     log("&7[&6Bots&7] &6* &cRENDERING...")
     hud3D.clearAll() -- clear all rendered
 end
+
+
+-- if (distanceTo(xGrid, yGrid, zGrid) > smallestInterval) then
+    -- ...render new grid
