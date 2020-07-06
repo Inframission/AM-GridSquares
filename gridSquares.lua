@@ -4,9 +4,9 @@
     local ycount = 1
     local zcount = 7
 
-    local xinterval = 10
-    local yinterval = 10
-    local zinterval = 10
+    local xinterval = 9
+    local yinterval = 7
+    local zinterval = 8
 
     local showGridThroughBlocks = false
 
@@ -15,9 +15,11 @@
         xcount = xcount-1
         ycount = ycount-1
         zcount = zcount-1
-        -- find smallest interval
 
-        -- smallestInterval = 
+        -- find smallest interval
+        local intervals = {xinterval, yinterval, zinterval} 
+        table.sort(intervals)
+        local smallestInterval = intervals[1]
 
     -- find grid position if grid centers at 0,0
         local xPreGrid = math.floor((getPlayer().pos[1])/xinterval)*xinterval
@@ -27,6 +29,10 @@
         local xoffset = xPreGrid - math.floor((getPlayer().pos[1]))
         local yoffset = yPreGrid - math.floor((getPlayer().pos[2]))
         local zoffset = zPreGrid - math.floor((getPlayer().pos[3]))
+    -- Calc first grid center position
+        local xGrid = xPreGrid - xoffset 
+        local yGrid = yPreGrid - yoffset
+        local zGrid = zPreGrid - zoffset
 
     local colors = {
         blue = {
@@ -62,29 +68,24 @@
     end
 
     local function renderNewGrid()
-    -- Calc current grid position from coordinates
-        xGrid = ( math.floor((getPlayer().pos[1])/xinterval)*xinterval ) - xoffset -- find x-coord of which grid player is currently in
-        yGrid = ( math.floor((getPlayer().pos[2])/yinterval)*yinterval ) - yoffset -- find y-coord of which grid player is currently in
-        zGrid = ( math.floor((getPlayer().pos[3])/zinterval)*zinterval ) - zoffset -- find z-coord of which grid player is currently in
-    -- Render new grid
-        log("xGrid "..xGrid)
-        log("yGrid "..yGrid)
-        log("zGrid "..zGrid)
-        log("Distance to Grid: "..distanceTo(xGrid,yGrid,zGrid) )
-        -- if (distanceTo(xGrid, yGrid, zGrid) > smallestInterval) then
-        hud3D.clearAll()
-        for i=0,xcount,1 do
-            xtarg = (xGrid + i*xinterval)-0.5*xcount*xinterval
-            for j=0,zcount,1 do  
-                ztarg = (zGrid+j*zinterval)-0.5*zcount*zinterval
-                for l=0,ycount,1 do
-                    ytarg = (yGrid+l*yinterval)-0.5*ycount*yinterval
-                    spawnBlockAt(xtarg,ytarg,ztarg, color)
+        -- Calc new grid center from coordinates
+            xGrid = ( math.floor((getPlayer().pos[1])/xinterval)*xinterval ) - xoffset
+            yGrid = ( math.floor((getPlayer().pos[2])/yinterval)*yinterval ) - yoffset
+            zGrid = ( math.floor((getPlayer().pos[3])/zinterval)*zinterval ) - zoffset
+        -- Render new grid
+            hud3D.clearAll()
+            for i=0,xcount,1 do
+                xtarg = (xGrid + i*xinterval)-0.5*xcount*xinterval
+                for j=0,zcount,1 do  
+                    ztarg = (zGrid+j*zinterval)-0.5*zcount*zinterval
+                    for l=0,ycount,1 do
+                        ytarg = (yGrid+l*yinterval)-0.5*ycount*yinterval
+                        spawnBlockAt(xtarg,ytarg,ztarg, color)
+                    end
                 end
             end
-        end
-
     end
+    
 
 
 -- MAIN -----------------------------------------------------
@@ -92,10 +93,14 @@
 gridSquares = not gridSquares
 if gridSquares == true then
     log("&7[&6Bots&7] &6* &aRENDERING...")
+    renderNewGrid()
 
     while gridSquares do
-        renderNewGrid()
+        if (distanceTo(xGrid, yGrid, zGrid) > smallestInterval) then
+            renderNewGrid()
+        end
         sleep(100)
+        log("Distance to Grid: "..distanceTo(xGrid,yGrid,zGrid) )
     end
 
 else
