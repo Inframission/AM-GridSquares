@@ -5,7 +5,7 @@
     local zcount = 7
 
     local xinterval = 10
-    local yinterval = 10
+    local yinterval = 1
     local zinterval = 10
 
     local showGridThroughBlocks = true
