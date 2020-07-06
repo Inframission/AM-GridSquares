@@ -58,7 +58,7 @@
         local xpos = getPlayer().pos[1]
         local ypos = getPlayer().pos[2]
         local zpos = getPlayer().pos[3]
-        return ( ( (xpos-x-0.5)^2 + (xpos-x-0.5)^2 + (zpos-z-0.5)^2 )^(1/2) )
+        return ( ( (xpos-x-0.5)^2 + (ypos-y)^2 + (zpos-z-0.5)^2 )^(1/2) )
     end
 
     local function renderNewGrid()
@@ -70,7 +70,7 @@
         log("xGrid "..xGrid)
         log("yGrid "..yGrid)
         log("zGrid "..zGrid)
-        log("Distance to Grid: "distanceTo(xGrid,zGrid) )
+        log("Distance to Grid: "..distanceTo(xGrid,yGrid,zGrid) )
         -- if (distanceTo(xGrid, yGrid, zGrid) > smallestInterval) then
         hud3D.clearAll()
         for i=0,xcount,1 do
