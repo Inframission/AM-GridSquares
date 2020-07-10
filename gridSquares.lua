@@ -93,7 +93,7 @@
 
 gridSquares = not gridSquares
 if gridSquares == true then
-    log("&7[&6Bots&7] &6* &aRENDERING...")
+    log("&7[&fBots&7] &6* &aRENDERING...")
     renderNewGrid()
 
     while gridSquares and gridTracksPlayer do
@@ -106,6 +106,6 @@ if gridSquares == true then
     end
 
 else
-    log("&7[&6Bots&7] &6* &cRENDERING...")
+    log("&7[&fBots&7] &6* &cRENDERING...")
     hud3D.clearAll() -- clear all rendered
 end
